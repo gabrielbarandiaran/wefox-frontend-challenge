@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { Post } from '../types/Post'
 import { AppActions } from '../types/actions'
-import { AppState } from '../store/configureStore'
 import { Dispatch } from 'redux'
 
 const url = "https://wf-challenge-7sibao3pxp.herokuapp.com/api/v1/posts"
@@ -111,7 +110,6 @@ export const startUpdatePost = ( post: Post ) => async (dispatch: Dispatch) => {
 
 export const startSetPost = ( id: number ) => async (dispatch: Dispatch) => {
   
-  console.log("helo")
   setIsFetching(true);
   const res = await axios.get(url + '/' + id);
   const post = res.data;
@@ -138,9 +136,9 @@ export const startSetPosts = () => async (dispatch: Dispatch) => {
 
   if(res.status === 200) {
     return dispatch(
-      setPosts({
+      setPosts([
         ...posts
-      })
+      ])
     )
   } else {
     let error = "There was a problem Dx"

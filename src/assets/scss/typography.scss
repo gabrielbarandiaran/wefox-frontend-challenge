@@ -9,29 +9,29 @@ p, span {
 }
 
 h1 {
-  @include rfs(5.38em);
+  @include rfs(5.38rem);
 }
 
 h2 {
-  @include rfs(3.84em);
+  @include rfs(3.84rem);
 }
 
 h3 {
-  @include rfs(2.74em);
+  @include rfs(2.74rem);
 }
 
 h4 {
-  @include rfs(1.96em);
+  @include rfs(1.96rem);
 }
 
 h5 {
-  @include rfs(1.4em);
+  @include rfs(1.4rem);
 }
 
 h6 {
-  @include rfs(1em);
+  @include rfs(1rem);
 }
 
 span, p {
-  @include rfs(.8em);
+  @include rfs(.8rem);
 }
