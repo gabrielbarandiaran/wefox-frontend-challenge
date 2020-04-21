@@ -69,10 +69,10 @@ const DataTable: React.FC<Props> = (props) => {
   };
 
   return(
-    <div className="dataTableBody b">
+    <div className="dataTableBody">
       <Paper>
         <TableContainer>
-          <Table stickyHeader aria-label="sticky table">
+          <Table stickyHeader>
             <TableHead>
               <TableRow>
                 {columns.map((column) => (

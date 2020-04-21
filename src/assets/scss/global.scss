@@ -7,24 +7,31 @@ $secondary-color: #05386B;
 $black: #323232;
 $white: #FCFCFC;
 
-// * {
-//   border: .1px solid black;
-// }
+* {
+  border: .1px solid black;
+}
 
 html {
   background-color: $white;
 }
 
+.section {
+  position: relative;
+  max-width: 100vh;
+  @include padding(5rem 10rem);
+}
+
+// Header
 nav {
   position: fixed;
   @include rfs(5rem, width);
   height: 100vh;
-  @include padding(.5rem 1rem)
+  @include padding(.5rem 1rem);
   top: 0;
   left: 0;
   text-align: center;
   overflow: hidden;
-  background-color: $white;
+  background-color: $black;
   
   img {
     max-width: 100%;
@@ -33,13 +40,14 @@ nav {
   
 }
 
-.section {
-  position: relative;
-  @include rfs(7rem, left);
-  @include margin(5rem 1rem)
-}
+// Dashboard section
 
 .dataTableBody {
   max-width: 50vw;
 }
 
+// Card Detail Section
+
+.postCard {
+  width: 25vw;
+}
