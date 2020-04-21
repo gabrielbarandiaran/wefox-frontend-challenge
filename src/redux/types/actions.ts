@@ -1,5 +1,7 @@
 import { Post } from "./Post"
 
+
+// POST ACTIONS
 export const ADD_POST = "ADD_POST"
 export const UPDATE_POST = "UPDATE_POST"
 export const REMOVE_POST = "REMOVE_POST"
@@ -54,5 +56,15 @@ export type PostActionTypes =
   | setPostIsFetching
   | setError;
 
-export type AppActions = PostActionTypes;
+//Application actions
+export const SET_APP_INTERFACE = "SET_APP_INTERFACE"
+
+export interface setAppInterface {
+  type: typeof SET_APP_INTERFACE,
+  activeInterface: "dashboard" | "postDetail"
+}
+
+export type AppActionTypes = setAppInterface
+
+export type AppActions = PostActionTypes | AppActionTypes;
 
