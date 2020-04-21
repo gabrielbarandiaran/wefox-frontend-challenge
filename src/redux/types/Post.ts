@@ -10,6 +10,6 @@ export interface Post {
 export interface PostStateInterface {
   post?: Post,
   posts: Post[],
-  isFetching: Boolean
+  isFetching: Boolean,
   error: string
 }

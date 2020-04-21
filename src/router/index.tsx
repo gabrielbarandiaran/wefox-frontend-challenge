@@ -2,7 +2,7 @@ import React from "react";
 import { Router, Route, Switch, Link, NavLink } from "react-router-dom";
 import createHistory from "history/createBrowserHistory";
 // Containers
-import Dashboard from 'containers/dashboard'
+import { Dashboard } from 'containers/dashboard'
 
 export const history = createHistory();
 
