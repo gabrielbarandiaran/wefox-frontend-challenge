@@ -2,13 +2,19 @@ import { PostStateInterface } from '../types/Post'
 import { PostActionTypes } from '../types/actions'
 
 const initialPostState: PostStateInterface ={
-  post: undefined,
+  post: {
+    title: "",
+    content: "",
+    lat: "",
+    long: "",
+    image_url: "",
+  },
   posts: [],
   isFetching: false,
   error: ""
 }
 
-const postsReducer = (state = initialPostState, action: PostActionTypes): PostStateInterface => {
+export const postsReducer = (state = initialPostState, action: PostActionTypes): PostStateInterface => {
   switch (action.type) {
     case "ADD_POST":
       return {
@@ -51,5 +57,3 @@ const postsReducer = (state = initialPostState, action: PostActionTypes): PostSt
       return state;
   }
 };
-
-export { postsReducer }

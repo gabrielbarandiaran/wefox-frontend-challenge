@@ -111,6 +111,7 @@ export const startUpdatePost = ( post: Post ) => async (dispatch: Dispatch) => {
 
 export const startSetPost = ( id: number ) => async (dispatch: Dispatch) => {
   
+  console.log("helo")
   setIsFetching(true);
   const res = await axios.get(url + '/' + id);
   const post = res.data;
