@@ -1,0 +1,37 @@
+@import "~rfs/scss";
+
+h1, h2, h3, h4, h5, h6 {
+
+}
+
+p, span {
+
+}
+
+h1 {
+  @include rfs(5.38em);
+}
+
+h2 {
+  @include rfs(3.84em);
+}
+
+h3 {
+  @include rfs(2.74em);
+}
+
+h4 {
+  @include rfs(1.96em);
+}
+
+h5 {
+  @include rfs(1.4em);
+}
+
+h6 {
+  @include rfs(1em);
+}
+
+span, p {
+  @include rfs(.8em);
+}
