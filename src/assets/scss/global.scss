@@ -2,7 +2,7 @@
 @import "~rfs/scss";
 
 // Color variables
-$primary-color: #00838f;
+$primary-color: #00818f;
 $secondary-color: #0097a7;
 $black: #323232;
 $white: #FCFCFC;
@@ -96,6 +96,7 @@ nav {
     background-color: $primary-color;
     border-radius: 50%;
     color: $white;
+    z-index: 10;
     box-shadow: 0 5px 5px -5px rgba(0,0,0,.5);
     transition-duration: .5s;
 
@@ -110,7 +111,7 @@ nav {
 // Dashboard section
 
 .dataTableBody {
-  max-width: 50vw;
+  width: 50vw;
 }
 
 // Card Detail Section
@@ -123,4 +124,22 @@ nav {
 .addEditPostFormBody {
   width: 30vw;
   @include padding(3rem 2rem);
+}
+
+@media (max-width: 900px) {
+
+  .dataTableBody {
+    width: 90vw;
+  }
+
+  .postCard {
+    width: 90vw;
+  }
+
+  .addEditPostFormBody {
+    z-index: 5;
+    width: 80vw;
+    @include padding(1rem 1rem);
+  }
+
 }

@@ -75,7 +75,7 @@ const PostCard: React.FC<Props> = (props) => {
           <CardMedia
             component="img"
             alt={props.post?.title}
-            height="300"
+            height="200"
             image={props.post?.image_url}
             title={props.post?.title}
           />
