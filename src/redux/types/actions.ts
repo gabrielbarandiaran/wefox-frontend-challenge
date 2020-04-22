@@ -61,7 +61,7 @@ export const SET_APP_INTERFACE = "SET_APP_INTERFACE"
 
 export interface setAppInterface {
   type: typeof SET_APP_INTERFACE,
-  activeInterface: "dashboard" | "postDetail"
+  activeInterface: "dashboard" | "postDetail" | "addPost"
 }
 
 export type AppActionTypes = setAppInterface

@@ -1,7 +1,7 @@
 import React from 'react'
-import {Helmet} from 'react-helmet'
+import { Helmet } from 'react-helmet'
 // Components
-import { Header } from 'components/header'
+import Header from 'components/header'
 // Styles
 import 'assets/scss/global.scss'
 import 'normalize-scss'

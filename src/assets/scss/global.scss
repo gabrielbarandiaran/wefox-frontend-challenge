@@ -7,9 +7,9 @@ $secondary-color: #05386B;
 $black: #323232;
 $white: #FCFCFC;
 
-* {
-  border: .1px solid black;
-}
+// * {
+//   border: .1px solid black;
+// }
 
 html {
   background-color: $white;
@@ -50,4 +50,10 @@ nav {
 
 .postCard {
   width: 25vw;
+}
+
+// Add/Edit Post Form Section
+.addEditPostFormBody {
+  width: 45vw;
+  @include padding(3rem 2rem);
 }
