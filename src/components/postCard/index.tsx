@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk';
 import { startSetAppInterface } from 'redux/actions/application'
+import { startRemovePost } from 'redux/actions/post'
 import { AppState } from 'redux/store/configureStore';
 import { AppActions } from 'redux/types/actions';
 import { Post } from 'redux/types/Post';
@@ -23,8 +24,19 @@ type Props = PostCardProps & LinkDispatchProps & LinkStateProps;
 
 const PostCard: React.FC<Props> = (props) => {
 
-  const handleRowClick = () => {
+  const handleCancelClick = () => {
     props.startSetAppInterface("dashboard");
+  }
+
+  const handleEditClick = () => {
+    props.startSetAppInterface("addEditPost");
+  }
+
+  const handleDeleteClick = () => {
+    if(props.post?.id !== undefined) {
+      props.startRemovePost(props.post?.id);
+      props.startSetAppInterface("dashboard");
+    }
   }
 
   return(
@@ -43,17 +55,22 @@ const PostCard: React.FC<Props> = (props) => {
       </CardContent>
       <CardActions>
         <Button 
-        size="large" 
-        color="primary">
+          size="large"
+          onClick={() => handleEditClick()}
+          >
           Edit
         </Button>
-        <Button size="large" color="primary">
+        <Button 
+          size="large"
+          onClick={() => handleDeleteClick()}
+          >
           Delete
         </Button>
         <Button 
           size="large" 
           color="primary"
-          onClick={() => handleRowClick()}>
+          onClick={() => handleCancelClick()}
+          >
           Go Back
         </Button>
       </CardActions>
@@ -66,7 +83,8 @@ interface LinkStateProps {
 }
  
 interface LinkDispatchProps {
-  startSetAppInterface: (activeInterface: "dashboard" | "postDetail" | "addPost") => void;
+  startSetAppInterface: (activeInterface: "dashboard" | "postDetail" | "addEditPost") => void;
+  startRemovePost: (id: number) => void;
 }
 
 const mapStateToProps = (state: AppState, props: PostCardProps): LinkStateProps => ({
@@ -74,7 +92,8 @@ const mapStateToProps = (state: AppState, props: PostCardProps): LinkStateProps 
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, props: PostCardProps): LinkDispatchProps => ({
-  startSetAppInterface: bindActionCreators(startSetAppInterface, dispatch)
+  startSetAppInterface: bindActionCreators(startSetAppInterface, dispatch),
+  startRemovePost: bindActionCreators(startRemovePost, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostCard);

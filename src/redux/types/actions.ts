@@ -24,7 +24,7 @@ export interface UpdatePostAction {
 
 export interface RemovePostAction {
   type: typeof REMOVE_POST;
-  id: number;
+  id?: number;
 }
 
 export interface SetPostAction {
@@ -61,7 +61,7 @@ export const SET_APP_INTERFACE = "SET_APP_INTERFACE"
 
 export interface setAppInterface {
   type: typeof SET_APP_INTERFACE,
-  activeInterface: "dashboard" | "postDetail" | "addPost"
+  activeInterface: "dashboard" | "postDetail" | "addEditPost"
 }
 
 export type AppActionTypes = setAppInterface

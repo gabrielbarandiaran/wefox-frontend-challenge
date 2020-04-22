@@ -10,7 +10,7 @@ const addPost = (post: Post): AppActions => ({
   post
 });
 
-const removePost = ( id: number ): AppActions => ({
+const removePost = ( id?: number ): AppActions => ({
   type: "REMOVE_POST",
   id
 });
@@ -42,11 +42,10 @@ const setError = (error: string): AppActions => ({
 
 export const startAddPost = (post : Post) => async (dispatch: Dispatch) => {
     
-  console.log(post)
-
   const res = await axios.post(url, post)
 
   if(res.status === 201) {
+    setError("");
     console.log('success')
     return dispatch(
       addPost({
@@ -54,24 +53,24 @@ export const startAddPost = (post : Post) => async (dispatch: Dispatch) => {
       })
     )
   } else {
-    console.log('error')
-    let error = "There was a problem Dx"
+    let error = "There was a problem adding your post. Please check if the fields are correct or contact support"
     return dispatch(
       setError(error)
     )
   }
 };
 
-export const startRemovePost = ( id: number ) => async (dispatch: Dispatch) => {
+export const startRemovePost = ( id?: number ) => async (dispatch: Dispatch) => {
   
   const res = await axios.delete(url + '/' + id);
 
   if(res.status === 204) {
+    setError("");
     return dispatch(
       removePost(id)
     )
   } else {
-    let error = "There was a problem Dx"
+    let error = "There was a problem removing your post. Please contact support"
     return dispatch(
       setError(error)
     )
@@ -84,13 +83,14 @@ export const startUpdatePost = ( post: Post ) => async (dispatch: Dispatch) => {
   const res = await axios.put(url + '/' + post.id, post);
 
   if(res.status === 200) {
+    setError("");
     return dispatch(
       updatePost({
         ...post
       })
     )
   } else {
-    let error = "There was a problem Dx"
+    let error = "There was a problem editing your post. Please check if the fields are correct or contact support"
     return dispatch(
       setError(error)
     )
@@ -104,17 +104,34 @@ export const startSetPost = ( id: number ) => async (dispatch: Dispatch) => {
   const post = res.data;
   
   if(res.status === 200) {
+    setError("");
     return dispatch(
       setPost({
         ...post
       })
     )
   } else {
-    let error = "There was a problem Dx"
+    let error = "There was a problem fetching this specific post. Please contact support"
     return dispatch(
       setError(error)
     )
   }
+};
+
+export const startSetEmptyPost = () => {
+  
+  const post = {
+    id: undefined,
+    title: "",
+    content: "",
+    lat: "",
+    long: "",
+    image_url: "",
+  }
+
+  return (dispatch: Dispatch<AppActions>) => {
+    dispatch(setPost(post));
+  };
 };
 
 export const startSetPosts = () => async (dispatch: Dispatch) => {
@@ -124,13 +141,14 @@ export const startSetPosts = () => async (dispatch: Dispatch) => {
   let posts = res.data;
 
   if(res.status === 200) {
+    setError("");
     return dispatch(
       setPosts([
         ...posts
       ])
     )
   } else {
-    let error = "There was a problem Dx"
+    let error = "There was a problem fetching the posts. Please contact support"
     return dispatch(
       setError(error)
     )

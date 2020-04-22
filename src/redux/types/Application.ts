@@ -1,3 +1,3 @@
 export interface AppStateInterface {
-  activeInterface: "dashboard" | "postDetail" | "addPost" 
+  activeInterface: "dashboard" | "postDetail" | "addEditPost" 
 }
