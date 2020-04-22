@@ -47,7 +47,7 @@ export const postsReducer = (state = initialPostState, action: PostActionTypes):
       case "SET_FETCHING":
         return {
           ...state,
-          isFetching: true
+          isFetching: action.isFetching
         };
       case "SET_ERROR":
         return {

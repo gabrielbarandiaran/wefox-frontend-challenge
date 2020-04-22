@@ -42,10 +42,12 @@ const setError = (error: string): AppActions => ({
 
 export const startAddPost = (post : Post) => async (dispatch: Dispatch) => {
     
+  setIsFetching(true);
   const res = await axios.post(url, post)
 
   if(res.status === 201) {
     setError("");
+    setIsFetching(false);
     console.log('success')
     return dispatch(
       addPost({
@@ -53,6 +55,7 @@ export const startAddPost = (post : Post) => async (dispatch: Dispatch) => {
       })
     )
   } else {
+    setIsFetching(false);
     let error = "There was a problem adding your post. Please check if the fields are correct or contact support"
     return dispatch(
       setError(error)
@@ -62,34 +65,40 @@ export const startAddPost = (post : Post) => async (dispatch: Dispatch) => {
 
 export const startRemovePost = ( id?: number ) => async (dispatch: Dispatch) => {
   
+  setIsFetching(true);
   const res = await axios.delete(url + '/' + id);
 
   if(res.status === 204) {
     setError("");
+    setIsFetching(false);
     return dispatch(
       removePost(id)
     )
   } else {
+    setIsFetching(false);
     let error = "There was a problem removing your post. Please contact support"
     return dispatch(
       setError(error)
     )
   }
-
+  
 };
 
 export const startUpdatePost = ( post: Post ) => async (dispatch: Dispatch) => {
   
+  setIsFetching(true);
   const res = await axios.put(url + '/' + post.id, post);
 
   if(res.status === 200) {
     setError("");
+    setIsFetching(false);
     return dispatch(
       updatePost({
         ...post
       })
     )
   } else {
+    setIsFetching(false);
     let error = "There was a problem editing your post. Please check if the fields are correct or contact support"
     return dispatch(
       setError(error)
@@ -105,12 +114,14 @@ export const startSetPost = ( id: number ) => async (dispatch: Dispatch) => {
   
   if(res.status === 200) {
     setError("");
+    setIsFetching(false);
     return dispatch(
       setPost({
         ...post
       })
     )
   } else {
+    setIsFetching(false);
     let error = "There was a problem fetching this specific post. Please contact support"
     return dispatch(
       setError(error)
@@ -142,12 +153,14 @@ export const startSetPosts = () => async (dispatch: Dispatch) => {
 
   if(res.status === 200) {
     setError("");
+    setIsFetching(false);
     return dispatch(
       setPosts([
         ...posts
       ])
     )
   } else {
+    setIsFetching(false);
     let error = "There was a problem fetching the posts. Please contact support"
     return dispatch(
       setError(error)

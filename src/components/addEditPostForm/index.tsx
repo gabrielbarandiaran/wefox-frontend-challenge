@@ -12,7 +12,6 @@ import { Post } from 'redux/types/Post';
 // Material UI
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button'
 
 interface PostCardProps {
   post?: Post,
@@ -61,47 +60,52 @@ const AddEditPostForm: React.FC<Props> = (props) => {
     <Paper classes={{root: "addEditPostFormBody"}}>
       <Grid>
         <Row>
-          <Col xs={12} lg={4}>
+          <Col xs={12} lg={6}>
             <TextField 
               required 
               fullWidth 
+              style={{margin:'1rem 0'}}
               label="Title" 
               value={formPost.title}
               onChange={e => setFormPost({...formPost, title: e.target.value})}/>
           </Col>
-          <Col xs={12} lgOffset={1} lg={4}>
+          <Col xs={12} lg={6}>
             <TextField 
               required 
               fullWidth 
+              style={{margin:'1rem 0'}}
               label="Image URL" 
               value={formPost.image_url}
               onChange={e => setFormPost({...formPost, image_url: e.target.value})}/>
           </Col>
         </Row>
         <Row>
-          <Col xs={12} lg={4}>
+          <Col xs={12} lg={6}>
             <TextField 
               required 
               fullWidth 
+              style={{margin:'1rem 0'}}
               label="Latitude" 
               value={formPost.lat}
               onChange={e => setFormPost({...formPost, lat: e.target.value})}/>
           </Col>
-          <Col xs={12} lgOffset={1} lg={4}>
+          <Col xs={12} lg={6}>
             <TextField 
               required 
               fullWidth 
+              style={{margin:'1rem 0'}}
               label="Longitude" 
               value={formPost.long}
               onChange={e => setFormPost({...formPost, long: e.target.value})}/>
           </Col>
         </Row>
         <Row>
-          <Col xs={12} lg={9}>
+          <Col xs={12} lg={12}>
             <TextField 
               required 
               fullWidth 
               multiline 
+              style={{margin:'1rem 0'}}
               label="Content" 
               value={formPost.content}
               onChange={e => setFormPost({...formPost, content: e.target.value})}/>
@@ -109,16 +113,18 @@ const AddEditPostForm: React.FC<Props> = (props) => {
         </Row>
         <Row>
           <Col xs={12} lg={9}>
-            <Button 
-              size="large"
-              onClick={() => handleSendClick()}>
-              ADD POST
-            </Button>
-            <Button 
-              size="large"
-              onClick={() => handleCancelClick()}>
-              CANCEL
-            </Button>
+            <div>
+              <button 
+                className="button"
+                onClick={() => handleSendClick()}>
+                {formPost.id === undefined ? "Add Post" : "Edit Post"}
+              </button>
+              <button 
+                className="button"
+                onClick={() => handleCancelClick()}>
+                CANCEL
+              </button>
+            </div>
           </Col>
         </Row>
       </Grid>

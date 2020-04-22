@@ -5,7 +5,9 @@ import PostCard from 'components/postCard'
 const PostDetail: React.FC = () => {
   return(
     <div className="section">
-      <PostCard />
+      <div className="sectionContent">
+        <PostCard />
+      </div>
     </div>
   )
 }

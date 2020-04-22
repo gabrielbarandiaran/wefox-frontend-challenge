@@ -7,6 +7,8 @@ import { startSetAppInterface } from 'redux/actions/application'
 import { startSetEmptyPost } from 'redux/actions/post'
 import { AppState } from 'redux/store/configureStore';
 import { AppActions } from 'redux/types/actions';
+// Material-UI
+import AddIcon from '@material-ui/icons/Add';
 // Images
 import logo from 'assets/images/logo/logo192.png'
 
@@ -26,15 +28,14 @@ const Header: React.FC<Props> = (props) => {
   }
 
   return(
-    <>
     <nav>
-      <img src={logo} alt="Logo" />
+      <div className="navBar">
+        <img src={logo} alt="Logo" />
+      </div>
+      <button className="navAddPostBtn" onClick={() => handleClick()}>
+        <AddIcon fontSize="large" />
+      </button>
     </nav>
-      <h1
-        onClick={() => handleClick()}>
-        Add
-      </h1>
-      </>
   )
 }
 
