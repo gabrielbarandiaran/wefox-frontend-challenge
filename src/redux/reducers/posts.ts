@@ -3,6 +3,7 @@ import { PostActionTypes } from '../types/actions'
 
 const initialPostState: PostStateInterface ={
   post: {
+    id: undefined,
     title: "",
     content: "",
     lat: "",

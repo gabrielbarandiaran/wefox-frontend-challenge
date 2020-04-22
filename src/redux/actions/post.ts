@@ -113,7 +113,7 @@ export const startSetPost = ( id: number ) => async (dispatch: Dispatch) => {
   setIsFetching(true);
   const res = await axios.get(url + '/' + id);
   const post = res.data;
-
+  
   if(res.status === 200) {
     return dispatch(
       setPost({

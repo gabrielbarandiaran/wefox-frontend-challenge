@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
+// Redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk';
-import { startSetPosts } from 'redux/actions/post'
+import { startSetPosts, startSetPost } from 'redux/actions/post'
+import { startSetAppInterface } from 'redux/actions/application'
 import { AppState } from 'redux/store/configureStore';
 import { AppActions } from 'redux/types/actions';
 import { Post } from 'redux/types/Post';
@@ -20,7 +22,7 @@ interface DataTableProps {
   posts?: Post[]
 }
 
-type Props = DataTableProps & LinkDispatchProps & LinkStateProp;
+type Props = DataTableProps & LinkDispatchProps & LinkStateProps;
 
 
 interface Column {
@@ -68,6 +70,13 @@ const DataTable: React.FC<Props> = (props) => {
     setPage(0);
   };
 
+  const handleRowClick = (id?: number) => {
+    props.startSetAppInterface("postDetail");
+    if (id !== undefined) {
+      props.startSetPost(id);
+    }
+  }
+
   return(
     <div className="dataTableBody">
       <Paper>
@@ -89,7 +98,12 @@ const DataTable: React.FC<Props> = (props) => {
             <TableBody>
               {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((post) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={post.id}>
+                  <TableRow 
+                    onClick={() => handleRowClick(post.id)} 
+                    hover 
+                    role="checkbox" 
+                    tabIndex={-1} 
+                    key={post.id}>
                     {columns.map((column) => {
                       const value = post[column.id];
                       return (
@@ -118,20 +132,24 @@ const DataTable: React.FC<Props> = (props) => {
   )
 }
 
-interface LinkStateProp {
+interface LinkStateProps {
   posts: Post[]
  }
  
  interface LinkDispatchProps {
    startSetPosts: () => void;
+   startSetPost: (id: number) => void;
+   startSetAppInterface: (activeInterface: "dashboard" | "postDetail") => void;
  }
  
- const mapStateToProps = (state: AppState, props: DataTableProps): LinkStateProp => ({
+ const mapStateToProps = (state: AppState, props: DataTableProps): LinkStateProps => ({
    posts: state.posts.posts
  });
  
  const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, props: DataTableProps): LinkDispatchProps => ({
-   startSetPosts: bindActionCreators(startSetPosts, dispatch)
+   startSetPosts: bindActionCreators(startSetPosts, dispatch),
+   startSetPost: bindActionCreators(startSetPost, dispatch),
+   startSetAppInterface: bindActionCreators(startSetAppInterface, dispatch)
  });
  
  export default connect(mapStateToProps, mapDispatchToProps)(DataTable);
