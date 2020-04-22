@@ -17,6 +17,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import TextField from '@material-ui/core/TextField';
 
 interface DataTableProps {
   posts?: Post[]
@@ -53,13 +54,14 @@ const columns: Column[] = [
 ];
 
 const DataTable: React.FC<Props> = (props) => {
+  const {posts} = props;
+  const [page, setPage] = useState(0);
+  const [filter, setFilter] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
   useEffect(() => {
     props.startSetPosts();
   }, []);
-  
-  const {posts} = props;
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
   
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -80,9 +82,16 @@ const DataTable: React.FC<Props> = (props) => {
   return(
     <div className="dataTableBody">
       <Paper>
+            <TextField 
+              required 
+              style={{margin:'1rem 1rem 2rem 1rem', width:'70%'}}
+              label="Title filter" 
+              value={filter}
+              onChange={e => setFilter(e.target.value.toLowerCase())}
+              />
         <TableContainer>
           <Table stickyHeader>
-            <TableHead>
+            <TableHead >
               <TableRow>
                 {columns.map((column) => (
                   <TableCell
@@ -97,6 +106,7 @@ const DataTable: React.FC<Props> = (props) => {
             </TableHead>
             <TableBody>
               {posts.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((post) => {
+                if (post.title.toLowerCase().includes(filter)) {
                 return (
                   <TableRow 
                     onClick={() => handleRowClick(post.id)} 
@@ -114,7 +124,7 @@ const DataTable: React.FC<Props> = (props) => {
                     })}
                   </TableRow>
                 );
-              })}
+              }})}
             </TableBody>
           </Table>
         </TableContainer>

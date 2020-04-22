@@ -35,7 +35,7 @@ const setIsFetching = (isFetching: boolean): AppActions => ({
   isFetching
 });
 
-const setError = (error: string): AppActions => ({
+export const setError = (error: string): AppActions => ({
   type: "SET_ERROR",
   error
 });
@@ -43,53 +43,49 @@ const setError = (error: string): AppActions => ({
 export const startAddPost = (post : Post) => async (dispatch: Dispatch) => {
     
   setIsFetching(true);
-  const res = await axios.post(url, post)
-
-  if(res.status === 201) {
+  await axios.post(url, post)
+  .then(res => {
     setError("");
     setIsFetching(false);
-    console.log('success')
     return dispatch(
       addPost({
         ...post
       })
-    )
-  } else {
+    )}
+  ).catch(err => {
     setIsFetching(false);
     let error = "There was a problem adding your post. Please check if the fields are correct or contact support"
     return dispatch(
       setError(error)
     )
-  }
+  })
 };
 
 export const startRemovePost = ( id?: number ) => async (dispatch: Dispatch) => {
   
   setIsFetching(true);
-  const res = await axios.delete(url + '/' + id);
-
-  if(res.status === 204) {
+  await axios.delete(url + '/' + id)
+  .then(res => {
     setError("");
     setIsFetching(false);
     return dispatch(
       removePost(id)
     )
-  } else {
+  })
+  .catch(err => {
     setIsFetching(false);
     let error = "There was a problem removing your post. Please contact support"
     return dispatch(
       setError(error)
     )
-  }
-  
+  })
 };
 
 export const startUpdatePost = ( post: Post ) => async (dispatch: Dispatch) => {
   
   setIsFetching(true);
-  const res = await axios.put(url + '/' + post.id, post);
-
-  if(res.status === 200) {
+  await axios.put(url + '/' + post.id, post)
+  .then(res => {
     setError("");
     setIsFetching(false);
     return dispatch(
@@ -97,22 +93,22 @@ export const startUpdatePost = ( post: Post ) => async (dispatch: Dispatch) => {
         ...post
       })
     )
-  } else {
+  })
+  .catch(err => {
     setIsFetching(false);
     let error = "There was a problem editing your post. Please check if the fields are correct or contact support"
     return dispatch(
       setError(error)
     )
-  }
+  })
 };
 
 export const startSetPost = ( id: number ) => async (dispatch: Dispatch) => {
   
   setIsFetching(true);
-  const res = await axios.get(url + '/' + id);
-  const post = res.data;
-  
-  if(res.status === 200) {
+  await axios.get(url + '/' + id)
+  .then(res => {
+    const post = res.data;
     setError("");
     setIsFetching(false);
     return dispatch(
@@ -120,13 +116,14 @@ export const startSetPost = ( id: number ) => async (dispatch: Dispatch) => {
         ...post
       })
     )
-  } else {
+  })
+  .catch(err => {
     setIsFetching(false);
     let error = "There was a problem fetching this specific post. Please contact support"
     return dispatch(
       setError(error)
     )
-  }
+  })
 };
 
 export const startSetEmptyPost = () => {
@@ -148,10 +145,9 @@ export const startSetEmptyPost = () => {
 export const startSetPosts = () => async (dispatch: Dispatch) => {
   
   setIsFetching(true);
-  const res = await axios.get(url);
-  let posts = res.data;
-
-  if(res.status === 200) {
+  await axios.get(url)
+  .then(res => {
+    let posts = res.data;
     setError("");
     setIsFetching(false);
     return dispatch(
@@ -159,11 +155,12 @@ export const startSetPosts = () => async (dispatch: Dispatch) => {
         ...posts
       ])
     )
-  } else {
+  })
+  .catch(err => {
     setIsFetching(false);
     let error = "There was a problem fetching the posts. Please contact support"
     return dispatch(
       setError(error)
     )
-  }
+  })
 };

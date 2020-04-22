@@ -14,8 +14,7 @@ import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField';
 
 interface PostCardProps {
-  post?: Post,
-  error?: string
+  post?: Post;
 }
 
 type Props = PostCardProps & LinkDispatchProps & LinkStateProps;
@@ -41,18 +40,10 @@ const AddEditPostForm: React.FC<Props> = (props) => {
   const handleSendClick = () => {
     if(formPost.id === undefined) {
       props.startAddPost(formPost);
-      if(props.error === "") {
-        props.startSetAppInterface("dashboard");
-      } else {
-
-      }
+      props.startSetAppInterface("dashboard");
     } else {
       props.startUpdatePost(formPost);
-      if(props.error === "") {
-        props.startSetAppInterface("postDetail");
-      } else {
-        
-      }
+      props.startSetAppInterface("postDetail");
     }
   }
 
@@ -133,8 +124,7 @@ const AddEditPostForm: React.FC<Props> = (props) => {
 }
 
 interface LinkStateProps {
-  post?: Post,
-  error?: string
+  post?: Post
 }
  
 interface LinkDispatchProps {
@@ -144,8 +134,7 @@ interface LinkDispatchProps {
 }
 
 const mapStateToProps = (state: AppState, props: PostCardProps): LinkStateProps => ({
-  post: state.posts.post,
-  error: state.posts.error
+  post: state.posts.post
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, props: PostCardProps): LinkDispatchProps => ({
