@@ -7,7 +7,7 @@ import { Dashboard } from './dashboard'
 import PostDetail from './postDetail'
 
 interface MainPageProps {
-  activeInterface: "dashboard" | "postDetail"
+  activeInterface: "dashboard" | "postDetail" | "addPost"
 }
 
 
@@ -23,7 +23,7 @@ const Main: React.FC<Props> = (props) => {
 }
 
 interface LinkStateProps {
-  activeInterface: "dashboard" | "postDetail"
+  activeInterface: "dashboard" | "postDetail" | "addPost"
 }
 
 const mapStateToProps = (

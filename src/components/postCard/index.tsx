@@ -22,6 +22,11 @@ interface PostCardProps {
 type Props = PostCardProps & LinkDispatchProps & LinkStateProps;
 
 const PostCard: React.FC<Props> = (props) => {
+
+  const handleRowClick = () => {
+    props.startSetAppInterface("dashboard");
+  }
+
   return(
     <Card classes={{root:"postCard"}}>
       <CardActionArea>
@@ -37,11 +42,19 @@ const PostCard: React.FC<Props> = (props) => {
         {props.post?.lat}
       </CardContent>
       <CardActions>
-        <Button size="large" color="primary">
+        <Button 
+        size="large" 
+        color="primary">
           Edit
         </Button>
         <Button size="large" color="primary">
           Delete
+        </Button>
+        <Button 
+          size="large" 
+          color="primary"
+          onClick={() => handleRowClick()}>
+          Go Back
         </Button>
       </CardActions>
     </Card>
@@ -53,7 +66,7 @@ interface LinkStateProps {
 }
  
 interface LinkDispatchProps {
-  startSetAppInterface: (activeInterface: "dashboard" | "postDetail") => void;
+  startSetAppInterface: (activeInterface: "dashboard" | "postDetail" | "addPost") => void;
 }
 
 const mapStateToProps = (state: AppState, props: PostCardProps): LinkStateProps => ({
