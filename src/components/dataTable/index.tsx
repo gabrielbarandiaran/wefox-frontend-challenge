@@ -139,7 +139,7 @@ interface LinkStateProps {
  interface LinkDispatchProps {
    startSetPosts: () => void;
    startSetPost: (id: number) => void;
-   startSetAppInterface: (activeInterface: "dashboard" | "postDetail" | "addPost") => void;
+   startSetAppInterface: (activeInterface: "dashboard" | "postDetail" | "addEditPost") => void;
  }
  
  const mapStateToProps = (state: AppState, props: DataTableProps): LinkStateProps => ({

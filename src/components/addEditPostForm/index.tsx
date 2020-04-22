@@ -15,7 +15,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 
 interface PostCardProps {
-  post?: Post
+  post?: Post,
+  error?: string
 }
 
 type Props = PostCardProps & LinkDispatchProps & LinkStateProps;
@@ -31,14 +32,28 @@ const AddEditPostForm: React.FC<Props> = (props) => {
   })
 
   const handleCancelClick = () => {
-    props.startSetAppInterface("dashboard");
+    if(formPost.id === undefined) {
+      props.startSetAppInterface("dashboard");
+    } else {
+      props.startSetAppInterface("postDetail");
+    }
   }
 
   const handleSendClick = () => {
     if(formPost.id === undefined) {
       props.startAddPost(formPost);
+      if(props.error === "") {
+        props.startSetAppInterface("dashboard");
+      } else {
+
+      }
     } else {
       props.startUpdatePost(formPost);
+      if(props.error === "") {
+        props.startSetAppInterface("postDetail");
+      } else {
+        
+      }
     }
   }
 
@@ -112,17 +127,19 @@ const AddEditPostForm: React.FC<Props> = (props) => {
 }
 
 interface LinkStateProps {
-  post?: Post
+  post?: Post,
+  error?: string
 }
  
 interface LinkDispatchProps {
-  startSetAppInterface: (activeInterface: "dashboard" | "postDetail" | "addPost") => void;
+  startSetAppInterface: (activeInterface: "dashboard" | "postDetail" | "addEditPost") => void;
   startUpdatePost: (post: Post) => void;
   startAddPost: (post: Post) => void;
 }
 
 const mapStateToProps = (state: AppState, props: PostCardProps): LinkStateProps => ({
-  post: state.posts.post
+  post: state.posts.post,
+  error: state.posts.error
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, props: PostCardProps): LinkDispatchProps => ({
