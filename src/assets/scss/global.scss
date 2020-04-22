@@ -1,0 +1,126 @@
+@import './typography.scss';
+@import "~rfs/scss";
+
+// Color variables
+$primary-color: #00838f;
+$secondary-color: #0097a7;
+$black: #323232;
+$white: #FCFCFC;
+
+// * {
+//   border: .1px solid black;
+// }
+
+html {
+  background-color: $white;
+}
+
+@mixin button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.button {
+  @include button;
+  @include margin(1rem 1rem 1rem 0);
+  @include padding(.5rem .8rem);
+  border-radius: 5px;
+  color: $white;
+  text-transform: uppercase;
+  @include rfs(1.2rem);
+  transition-duration: .1s;
+  background-color: $primary-color;
+
+  &:hover {
+    opacity: .9;
+  }
+}
+
+.section {
+  z-index: 10;
+  max-width: 100vh;
+  @include padding(8rem 5rem);
+
+  > .sectionContent {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.6);
+  .loadingAnime{
+    position: absolute;
+    color: $white;
+    left: 50%;
+    top: 50%;
+  }
+}
+
+// Header
+nav {
+  
+  .navBar {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    @include padding(.5rem);
+    background-color: $primary-color;
+    box-shadow: 0 5px 5px -5px rgba(0,0,0,.5);
+    text-align: center;
+
+    > img {
+      @include rfs(4rem, height);
+    }
+  }
+
+  .navAddPostBtn {
+    @include button;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 3.5rem;
+    height: 3.5rem;
+    @include margin(4rem 4rem);
+    background-color: $primary-color;
+    border-radius: 50%;
+    color: $white;
+    box-shadow: 0 5px 5px -5px rgba(0,0,0,.5);
+    transition-duration: .5s;
+
+    &:hover{
+      background-color: $secondary-color;
+      box-shadow: 0 10px 10px -8px rgba(0,0,0,.5);
+    }
+  }
+
+}
+
+// Dashboard section
+
+.dataTableBody {
+  max-width: 50vw;
+}
+
+// Card Detail Section
+
+.postCard {
+  width: 25vw;
+}
+
+// Add/Edit Post Form Section
+.addEditPostFormBody {
+  width: 30vw;
+  @include padding(3rem 2rem);
+}
