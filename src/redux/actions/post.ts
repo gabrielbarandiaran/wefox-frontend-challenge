@@ -40,32 +40,21 @@ const setError = (error: string): AppActions => ({
   error
 });
 
-export const startAddPost = (postData : {
-  title: string, 
-  content: string, 
-  lat: string, 
-  long: string, 
-  image_url: string}) => async (dispatch: Dispatch) => {
+export const startAddPost = (post : Post) => async (dispatch: Dispatch) => {
     
-  const res = await axios.post(url, postData)
+  console.log(post)
 
-  const {
-    title = "",
-    content = "",
-    lat = "",
-    long = "",
-    image_url = ""
-  } = postData;
+  const res = await axios.post(url, post)
 
-  const post = { title, content, lat, long, image_url };
-
-  if(res.status === 200) {
+  if(res.status === 201) {
+    console.log('success')
     return dispatch(
       addPost({
         ...post
       })
     )
   } else {
+    console.log('error')
     let error = "There was a problem Dx"
     return dispatch(
       setError(error)

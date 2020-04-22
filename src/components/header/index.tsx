@@ -20,7 +20,7 @@ type Props = HeaderProps & LinkDispatchProps & LinkStateProps;
 const Header: React.FC<Props> = (props) => {
 
   const handleClick = () => {
-    props.startSetAppInterface("dashboard");
+    props.startSetAppInterface("addPost");
   }
 
   return(

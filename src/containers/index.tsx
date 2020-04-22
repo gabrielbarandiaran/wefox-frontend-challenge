@@ -5,6 +5,7 @@ import { AppState } from "redux/store/configureStore";
 //Containers
 import { Dashboard } from './dashboard'
 import PostDetail from './postDetail'
+import AddPost from './addPost'
 
 interface MainPageProps {
   activeInterface: "dashboard" | "postDetail" | "addPost"
@@ -18,6 +19,7 @@ const Main: React.FC<Props> = (props) => {
     <div> 
       {props.activeInterface === "dashboard" && <Dashboard />}
       {props.activeInterface === "postDetail" && <PostDetail />}
+      {props.activeInterface === "addPost" && <AddPost />}
     </div>
   )
 }
