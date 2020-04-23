@@ -10,7 +10,7 @@ import { AppActions } from 'redux/types/actions';
 // Material-UI
 import AddIcon from '@material-ui/icons/Add';
 // Images
-import logo from 'assets/images/logo/logo192.png'
+import logo from 'assets/images/logo/logo192.png';
 
 interface HeaderProps {
   activeInterface?: "dashboard" | "postDetail" | "addEditPost"

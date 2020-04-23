@@ -1,8 +1,10 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { Layout } from 'components/layout'
 import AppRouter from 'router'
+// Redux
+import { Provider } from 'react-redux'
 import { store } from 'redux/store/configureStore'
+// Components
+import Layout from 'components/layout'
 
 const App: React.FC = () => {
   return (

@@ -1,0 +1,13 @@
+@import "~rfs/scss";
+
+.postCard {
+  width: 25vw;
+}
+
+@media (max-width: 900px) {
+
+  .postCard {
+    width: 90vw;
+  }
+
+}

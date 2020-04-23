@@ -1,0 +1,16 @@
+@import "~rfs/scss";
+
+.addEditPostFormBody {
+  width: 30vw;
+  @include padding(3rem 2rem);
+}
+
+@media (max-width: 900px) {
+
+  .addEditPostFormBody {
+    z-index: 5;
+    width: 80vw;
+    @include padding(1rem 1rem);
+  }
+
+}

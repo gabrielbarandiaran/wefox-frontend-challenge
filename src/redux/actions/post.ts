@@ -30,6 +30,7 @@ const setPosts = (posts: Post[]): AppActions => ({
   posts
 });
 
+// Set if data is being fetched or not
 const setIsFetching = (isFetching: boolean): AppActions => ({
   type: "SET_FETCHING",
   isFetching
@@ -40,6 +41,7 @@ export const setError = (error: string): AppActions => ({
   error
 });
 
+// Add a new post
 export const startAddPost = (post : Post) => async (dispatch: Dispatch) => {
     
   setIsFetching(true);
@@ -61,6 +63,7 @@ export const startAddPost = (post : Post) => async (dispatch: Dispatch) => {
   })
 };
 
+// Delete post given a specific ID and update store
 export const startRemovePost = ( id?: number ) => async (dispatch: Dispatch) => {
   
   setIsFetching(true);
@@ -81,6 +84,7 @@ export const startRemovePost = ( id?: number ) => async (dispatch: Dispatch) => 
   })
 };
 
+// Update post given a specific ID and update store
 export const startUpdatePost = ( post: Post ) => async (dispatch: Dispatch) => {
   
   setIsFetching(true);
@@ -103,6 +107,7 @@ export const startUpdatePost = ( post: Post ) => async (dispatch: Dispatch) => {
   })
 };
 
+// Fetch a specific post based on the ID and update post in store
 export const startSetPost = ( id: number ) => async (dispatch: Dispatch) => {
   
   setIsFetching(true);
@@ -126,6 +131,7 @@ export const startSetPost = ( id: number ) => async (dispatch: Dispatch) => {
   })
 };
 
+// Empty post in the store
 export const startSetEmptyPost = () => {
   
   const post = {
@@ -142,8 +148,8 @@ export const startSetEmptyPost = () => {
   };
 };
 
+// Fetch posts and update store
 export const startSetPosts = () => async (dispatch: Dispatch) => {
-  
   setIsFetching(true);
   await axios.get(url)
   .then(res => {

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 //Components
-import PostCard from 'components/postCard'
+import PostCard from 'components/postCard';
 
 const PostDetail: React.FC = () => {
   return(
@@ -12,4 +12,4 @@ const PostDetail: React.FC = () => {
   )
 }
 
-export default PostDetail
+export default PostDetail;

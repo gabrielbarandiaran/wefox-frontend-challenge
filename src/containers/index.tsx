@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
 // Redux
 import { bindActionCreators } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { AppState } from 'redux/store/configureStore';
 import { setError } from 'redux/actions/post'
 //Containers
-import { Dashboard } from './dashboard'
-import PostDetail from './postDetail'
+import Dashboard from './dashboard';
+import PostDetail from './postDetail';
 import AddEditPost from './addEditPost';
 // Material-UI
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -33,24 +33,28 @@ const Backdrop = () => {
 }
 
 const Main: React.FC<Props> = (props) => {
-  const [alertOpen, setAlertOpen] = React.useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
 
   useEffect(() => {
     if(props.error !== "") {
+      // Display error if there is one
       setAlertOpen(true);
       setTimeout(() => {
+        // Close error and empty error state after the error has been informed
         setAlertOpen(false);
         props.setError("")
       }
-      ,6500);
+      ,4000);
     }
-  });
+  })
+
+
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
     setAlertOpen(false);
-  };
+  }
 
   return(
     <div> 
@@ -84,10 +88,10 @@ const mapStateToProps = (
   activeInterface: state.application.activeInterface,
   isFetching: state.posts.isFetching,
   error: state.posts.error
-})
+});
  
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, props: MainPageProps): LinkDispatchProps => ({
   setError: bindActionCreators(setError, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -48,23 +48,30 @@ export interface setError {
 }
 
 export type PostActionTypes = 
-  AddPostAction 
-  | UpdatePostAction 
-  | RemovePostAction 
-  | SetPostAction 
-  | SetPostsAction
-  | setPostIsFetching
-  | setError;
+AddPostAction 
+| UpdatePostAction 
+| RemovePostAction 
+| SetPostAction 
+| SetPostsAction
+| setPostIsFetching
+| setError;
 
-//Application actions
-export const SET_APP_INTERFACE = "SET_APP_INTERFACE"
+// END POST ACTIONS
+
+
+// APPLICATION ACTIONS
+
+export const SET_APP_INTERFACE = "SET_APP_INTERFACE";
 
 export interface setAppInterface {
   type: typeof SET_APP_INTERFACE,
   activeInterface: "dashboard" | "postDetail" | "addEditPost"
 }
 
-export type AppActionTypes = setAppInterface
+export type AppActionTypes = setAppInterface;
+
+// END APPLICATION ACTIONS
+
 
 export type AppActions = PostActionTypes | AppActionTypes;
 

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 // Components
-import AddEditPostForm from 'components/addEditPostForm'
+import AddEditPostForm from 'components/addEditPostForm';
 
 const AddEditPost: React.FC = () => {
   return(
@@ -12,4 +12,4 @@ const AddEditPost: React.FC = () => {
   )
 }
 
-export default AddEditPost
+export default AddEditPost;

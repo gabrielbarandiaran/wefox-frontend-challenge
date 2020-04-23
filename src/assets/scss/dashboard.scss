@@ -1,0 +1,13 @@
+@import "~rfs/scss";
+
+.dataTableBody {
+  width: 50vw;
+}
+
+@media (max-width: 900px) {
+
+  .dataTableBody {
+    width: 90vw;
+  }
+
+}

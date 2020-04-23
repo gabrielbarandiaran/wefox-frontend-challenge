@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
 // Redux
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { startSetPosts, startSetPost } from 'redux/actions/post'
-import { startSetAppInterface } from 'redux/actions/application'
+import { startSetPosts, startSetPost } from 'redux/actions/post';
+import { startSetAppInterface } from 'redux/actions/application';
 import { AppState } from 'redux/store/configureStore';
 import { AppActions } from 'redux/types/actions';
 import { Post } from 'redux/types/Post';
@@ -24,7 +24,6 @@ interface DataTableProps {
 }
 
 type Props = DataTableProps & LinkDispatchProps & LinkStateProps;
-
 
 interface Column {
   id: 'title' | 'lat' | 'long';
@@ -60,17 +59,18 @@ const DataTable: React.FC<Props> = (props) => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
+    // Fetch posts on mounting
     props.startSetPosts();
   }, []);
   
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
-  };
+  }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
+  }
 
   const handleRowClick = (id?: number) => {
     props.startSetAppInterface("postDetail");
@@ -82,13 +82,13 @@ const DataTable: React.FC<Props> = (props) => {
   return(
     <div className="dataTableBody">
       <Paper>
-            <TextField 
-              required 
-              style={{margin:'1rem 1rem 2rem 1rem', width:'70%'}}
-              label="Title filter" 
-              value={filter}
-              onChange={e => setFilter(e.target.value.toLowerCase())}
-              />
+        <TextField 
+          required 
+          style={{margin:'1rem 1rem 2rem 1rem', width:'70%'}}
+          label="Title filter" 
+          value={filter}
+          onChange={e => setFilter(e.target.value.toLowerCase())}
+          />
         <TableContainer>
           <Table stickyHeader>
             <TableHead >
