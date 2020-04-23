@@ -1,16 +1,17 @@
-import React, {useState} from 'react'
-import { Grid, Row, Col } from 'react-flexbox-grid'
+import React, {useState} from 'react';
+import { Helmet } from 'react-helmet';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 // Redux
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { startUpdatePost, startAddPost } from 'redux/actions/post'
-import { startSetAppInterface } from 'redux/actions/application'
+import { startUpdatePost, startAddPost } from 'redux/actions/post';
+import { startSetAppInterface } from 'redux/actions/application';
 import { AppState } from 'redux/store/configureStore';
 import { AppActions } from 'redux/types/actions';
 import { Post } from 'redux/types/Post';
 // Material UI
-import Paper from '@material-ui/core/Paper'
+import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
 interface PostCardProps {
@@ -27,7 +28,7 @@ const AddEditPostForm: React.FC<Props> = (props) => {
     lat: props.post?.lat || "", 
     long: props.post?.long || "", 
     image_url: props.post?.image_url || ""
-  })
+  });
 
   const handleCancelClick = () => {
     if(formPost.id === undefined) {
@@ -48,78 +49,83 @@ const AddEditPostForm: React.FC<Props> = (props) => {
   }
 
   return(
-    <Paper classes={{root: "addEditPostFormBody"}}>
-      <Grid>
-        <Row>
-          <Col xs={12} lg={6}>
-            <TextField 
-              required 
-              fullWidth 
-              style={{margin:'1rem 0'}}
-              label="Title" 
-              value={formPost.title}
-              onChange={e => setFormPost({...formPost, title: e.target.value})}/>
-          </Col>
-          <Col xs={12} lg={6}>
-            <TextField 
-              required 
-              fullWidth 
-              style={{margin:'1rem 0'}}
-              label="Image URL" 
-              value={formPost.image_url}
-              onChange={e => setFormPost({...formPost, image_url: e.target.value})}/>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12} lg={6}>
-            <TextField 
-              required 
-              fullWidth 
-              style={{margin:'1rem 0'}}
-              label="Latitude" 
-              value={formPost.lat}
-              onChange={e => setFormPost({...formPost, lat: e.target.value})}/>
-          </Col>
-          <Col xs={12} lg={6}>
-            <TextField 
-              required 
-              fullWidth 
-              style={{margin:'1rem 0'}}
-              label="Longitude" 
-              value={formPost.long}
-              onChange={e => setFormPost({...formPost, long: e.target.value})}/>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12} lg={12}>
-            <TextField 
-              required 
-              fullWidth 
-              multiline 
-              style={{margin:'1rem 0'}}
-              label="Content" 
-              value={formPost.content}
-              onChange={e => setFormPost({...formPost, content: e.target.value})}/>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12} lg={9}>
-            <div>
-              <button 
-                className="button"
-                onClick={() => handleSendClick()}>
-                {formPost.id === undefined ? "Add Post" : "Edit Post"}
-              </button>
-              <button 
-                className="button"
-                onClick={() => handleCancelClick()}>
-                CANCEL
-              </button>
-            </div>
-          </Col>
-        </Row>
-      </Grid>
-    </Paper>
+    <>
+      <Helmet>
+        <title>Sweet Spot | {formPost.id === undefined ? "Add Post" : "Edit Post"}</title>
+      </Helmet>
+      <Paper classes={{root: "addEditPostFormBody"}}>
+        <Grid>
+          <Row>
+            <Col xs={12} lg={6}>
+              <TextField 
+                required 
+                fullWidth 
+                style={{margin:'1rem 0'}}
+                label="Title" 
+                value={formPost.title}
+                onChange={e => setFormPost({...formPost, title: e.target.value})}/>
+            </Col>
+            <Col xs={12} lg={6}>
+              <TextField 
+                required 
+                fullWidth 
+                style={{margin:'1rem 0'}}
+                label="Image URL" 
+                value={formPost.image_url}
+                onChange={e => setFormPost({...formPost, image_url: e.target.value})}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} lg={6}>
+              <TextField 
+                required 
+                fullWidth 
+                style={{margin:'1rem 0'}}
+                label="Latitude" 
+                value={formPost.lat}
+                onChange={e => setFormPost({...formPost, lat: e.target.value})}/>
+            </Col>
+            <Col xs={12} lg={6}>
+              <TextField 
+                required 
+                fullWidth 
+                style={{margin:'1rem 0'}}
+                label="Longitude" 
+                value={formPost.long}
+                onChange={e => setFormPost({...formPost, long: e.target.value})}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} lg={12}>
+              <TextField 
+                required 
+                fullWidth 
+                multiline 
+                style={{margin:'1rem 0'}}
+                label="Content" 
+                value={formPost.content}
+                onChange={e => setFormPost({...formPost, content: e.target.value})}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} lg={9}>
+              <div>
+                <button 
+                  className="button"
+                  onClick={() => handleSendClick()}>
+                  {formPost.id === undefined ? "Add Post" : "Edit Post"}
+                </button>
+                <button 
+                  className="button"
+                  onClick={() => handleCancelClick()}>
+                  CANCEL
+                </button>
+              </div>
+            </Col>
+          </Row>
+        </Grid>
+      </Paper>
+    </>
   )
 }
 

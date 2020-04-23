@@ -1,24 +1,25 @@
-import React from 'react'
-import GoogleMapReact from 'google-map-react'
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import GoogleMapReact from 'google-map-react';
 // Redux
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { ThunkDispatch } from 'redux-thunk'
-import { startSetAppInterface } from 'redux/actions/application'
-import { startRemovePost } from 'redux/actions/post'
-import { AppState } from 'redux/store/configureStore'
-import { AppActions } from 'redux/types/actions'
-import { Post } from 'redux/types/Post'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { startSetAppInterface } from 'redux/actions/application';
+import { startRemovePost } from 'redux/actions/post';
+import { AppState } from 'redux/store/configureStore';
+import { AppActions } from 'redux/types/actions';
+import { Post } from 'redux/types/Post';
 //Material-UI
-import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import IconButton from '@material-ui/core/IconButton'
-import ArrowBack from '@material-ui/icons/ArrowBack'
-import Modal from '@material-ui/core/Modal'
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import Modal from '@material-ui/core/Modal';
 
 interface PostCardProps {
   post?: Post
@@ -28,9 +29,6 @@ type Props = PostCardProps & LinkDispatchProps & LinkStateProps;
 
 const PostCard: React.FC<Props> = (props) => {
   const [open, setOpen] = React.useState(false);
-  if (props.post?.lat !== undefined && props.post?.long !== undefined){
-
-  }
 
   const handleModalOpen = () => {
     setOpen(true);
@@ -57,6 +55,9 @@ const PostCard: React.FC<Props> = (props) => {
   
   return(
     <>
+      <Helmet>
+        <title>Sweet Spot | {props.post?.title}</title>
+      </Helmet>
       <Card classes={{root:"postCard"}}>
         <CardHeader
           title={<h3>{props.post?.title}</h3>}

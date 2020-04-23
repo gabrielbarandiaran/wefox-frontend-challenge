@@ -1,4 +1,7 @@
 @import './typography.scss';
+@import './dashboard.scss';
+@import './cardDetail.scss';
+@import './addEditPost.scss';
 @import "~rfs/scss";
 
 // Color variables
@@ -104,42 +107,6 @@ nav {
       background-color: $secondary-color;
       box-shadow: 0 10px 10px -8px rgba(0,0,0,.5);
     }
-  }
-
-}
-
-// Dashboard section
-
-.dataTableBody {
-  width: 50vw;
-}
-
-// Card Detail Section
-
-.postCard {
-  width: 25vw;
-}
-
-// Add/Edit Post Form Section
-.addEditPostFormBody {
-  width: 30vw;
-  @include padding(3rem 2rem);
-}
-
-@media (max-width: 900px) {
-
-  .dataTableBody {
-    width: 90vw;
-  }
-
-  .postCard {
-    width: 90vw;
-  }
-
-  .addEditPostFormBody {
-    z-index: 5;
-    width: 80vw;
-    @include padding(1rem 1rem);
   }
 
 }
