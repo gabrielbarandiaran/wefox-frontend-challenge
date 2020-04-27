@@ -39,21 +39,13 @@ const Main: React.FC<Props> = (props) => {
     if(props.error !== "") {
       // Display error if there is one
       setAlertOpen(true);
-      setTimeout(() => {
-        // Close error and empty error state after the error has been informed
-        setAlertOpen(false);
-        props.setError("")
-      }
-      ,4000);
     }
   })
 
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setAlertOpen(false);
+    props.setError("")
+    return setAlertOpen(false);
   }
 
   return(

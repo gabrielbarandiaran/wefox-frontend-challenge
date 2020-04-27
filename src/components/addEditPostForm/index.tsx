@@ -5,7 +5,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { startUpdatePost, startAddPost } from 'redux/actions/post';
+import { startUpdatePost, startAddPost, setError } from 'redux/actions/post';
 import { startSetAppInterface } from 'redux/actions/application';
 import { AppState } from 'redux/store/configureStore';
 import { AppActions } from 'redux/types/actions';
@@ -16,6 +16,7 @@ import TextField from '@material-ui/core/TextField';
 
 interface PostCardProps {
   post?: Post;
+  error?: string;
 }
 
 type Props = PostCardProps & LinkDispatchProps & LinkStateProps;
@@ -39,11 +40,40 @@ const AddEditPostForm: React.FC<Props> = (props) => {
   }
 
   const handleSendClick = () => {
+    const lat = parseInt(formPost.lat, 10)
+    const long = parseInt(formPost.long, 10)
+    
+    if(formPost.title === "") {
+      return props.setError("Title can't be empty.")
+    }
+
+    if(formPost.lat === "" || formPost.long === "") {
+      return props.setError("Coordinates can't be empty.")
+    } else {
+      if(isNaN(lat) === true || isNaN(long) === true) {
+        return props.setError("Coordinates must be valid degrees.")
+      } else {
+        if(lat < -90 || lat > 90) {
+          return props.setError("Latitude must be between -90 and 90 degrees.")
+        } else {
+          if(long < -180 || long > 180) {
+            return props.setError("Longitude must be between -180 and 180 degrees")
+          }
+        }
+      }
+    }
+
+    if(formPost.content.length < 15 || formPost.content.length > 70) {
+      return props.setError("Content must be at least 15 and up to 70 characters long!")
+    } 
+
     if(formPost.id === undefined) {
       props.startAddPost(formPost);
+      props.setError("Post added successfully!!")
       props.startSetAppInterface("dashboard");
     } else {
       props.startUpdatePost(formPost);
+      props.setError("Post edited successfully!!")
       props.startSetAppInterface("postDetail");
     }
   }
@@ -56,7 +86,7 @@ const AddEditPostForm: React.FC<Props> = (props) => {
       <Paper classes={{root: "addEditPostFormBody"}}>
         <Grid>
           <Row>
-            <Col xs={12} lg={6}>
+            <Col xs={12} sm={6}>
               <TextField 
                 required 
                 fullWidth 
@@ -65,7 +95,7 @@ const AddEditPostForm: React.FC<Props> = (props) => {
                 value={formPost.title}
                 onChange={e => setFormPost({...formPost, title: e.target.value})}/>
             </Col>
-            <Col xs={12} lg={6}>
+            <Col xs={12} sm={6}>
               <TextField 
                 required 
                 fullWidth 
@@ -76,7 +106,7 @@ const AddEditPostForm: React.FC<Props> = (props) => {
             </Col>
           </Row>
           <Row>
-            <Col xs={12} lg={6}>
+            <Col xs={12} sm={6}>
               <TextField 
                 required 
                 fullWidth 
@@ -85,7 +115,7 @@ const AddEditPostForm: React.FC<Props> = (props) => {
                 value={formPost.lat}
                 onChange={e => setFormPost({...formPost, lat: e.target.value})}/>
             </Col>
-            <Col xs={12} lg={6}>
+            <Col xs={12} sm={6}>
               <TextField 
                 required 
                 fullWidth 
@@ -96,7 +126,7 @@ const AddEditPostForm: React.FC<Props> = (props) => {
             </Col>
           </Row>
           <Row>
-            <Col xs={12} lg={12}>
+            <Col xs={12} sm={12}>
               <TextField 
                 required 
                 fullWidth 
@@ -108,7 +138,7 @@ const AddEditPostForm: React.FC<Props> = (props) => {
             </Col>
           </Row>
           <Row>
-            <Col xs={12} lg={9}>
+            <Col xs={12} sm={9}>
               <div>
                 <button 
                   className="button"
@@ -130,23 +160,27 @@ const AddEditPostForm: React.FC<Props> = (props) => {
 }
 
 interface LinkStateProps {
-  post?: Post
+  post?: Post;
+  error?: string;
 }
  
 interface LinkDispatchProps {
   startSetAppInterface: (activeInterface: "dashboard" | "postDetail" | "addEditPost") => void;
   startUpdatePost: (post: Post) => void;
   startAddPost: (post: Post) => void;
+  setError: (error: string) => void;
 }
 
 const mapStateToProps = (state: AppState, props: PostCardProps): LinkStateProps => ({
-  post: state.posts.post
+  post: state.posts.post,
+  error: state.posts.error
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, props: PostCardProps): LinkDispatchProps => ({
   startSetAppInterface: bindActionCreators(startSetAppInterface, dispatch),
   startUpdatePost: bindActionCreators(startUpdatePost, dispatch),
-  startAddPost: bindActionCreators(startAddPost, dispatch)
+  startAddPost: bindActionCreators(startAddPost, dispatch),
+  setError: bindActionCreators(setError, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEditPostForm);
